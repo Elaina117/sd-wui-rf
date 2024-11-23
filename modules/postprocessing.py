@@ -129,7 +129,7 @@ def run_postprocessing(extras_mode, image, image_folder, input_dir, output_dir, 
     return outputs, ui_common.plaintext_to_html(infotext), ''
 
 
-def run_postprocessing_webui(id_task, *args, **kwargs):
+def run_postprocessing_wui(id_task, *args, **kwargs):
     return run_postprocessing(*args, **kwargs)
 
 

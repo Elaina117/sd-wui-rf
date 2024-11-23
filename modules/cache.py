@@ -8,8 +8,8 @@ import tqdm
 
 from modules.paths import data_path, script_path
 
-cache_filename = os.environ.get('SD_WEBUI_CACHE_FILE', os.path.join(data_path, "cache.json"))
-cache_dir = os.environ.get('SD_WEBUI_CACHE_DIR', os.path.join(data_path, "cache"))
+cache_filename = os.environ.get('SD_WUI_CACHE_FILE', os.path.join(data_path, "cache.json"))
+cache_dir = os.environ.get('SD_WUI_CACHE_DIR', os.path.join(data_path, "cache"))
 caches = {}
 cache_lock = threading.Lock()
 

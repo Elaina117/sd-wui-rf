@@ -36,7 +36,7 @@ def create_ui():
     tab_batch_dir.select(fn=lambda: 2, inputs=[], outputs=[tab_index])
 
     submit.click(
-        fn=call_queue.wrap_gradio_gpu_call(postprocessing.run_postprocessing_webui, extra_outputs=[None, '']),
+        fn=call_queue.wrap_gradio_gpu_call(postprocessing.run_postprocessing_wui, extra_outputs=[None, '']),
         _js="submit_extras",
         inputs=[
             dummy_component,

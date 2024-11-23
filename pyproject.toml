@@ -32,7 +32,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"webui.py" = ["E402"]  # Module level import not at top of file
+"wui.py" = ["E402"]  # Module level import not at top of file
 
 [tool.ruff.lint.flake8-bugbear]
 # Allow default arguments like, e.g., `data: List[str] = fastapi.Query(None)`.

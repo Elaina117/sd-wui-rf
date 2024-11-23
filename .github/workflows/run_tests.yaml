@@ -40,7 +40,7 @@ jobs:
           PIP_DISABLE_PIP_VERSION_CHECK: "1"
           PIP_PROGRESS_BAR: "off"
           TORCH_INDEX_URL: https://download.pytorch.org/whl/cpu
-          WEBUI_LAUNCH_LIVE_OUTPUT: "1"
+          WUI_LAUNCH_LIVE_OUTPUT: "1"
           PYTHONUNBUFFERED: "1"
       - name: Print installed packages
         run: pip freeze

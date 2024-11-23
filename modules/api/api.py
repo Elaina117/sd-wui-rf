@@ -135,7 +135,7 @@ def encode_pil_to_base64(image):
 def api_middleware(app: FastAPI):
     rich_available = False
     try:
-        if os.environ.get('WEBUI_RICH_EXCEPTIONS', None) is not None:
+        if os.environ.get('WUI_RICH_EXCEPTIONS', None) is not None:
             import anyio  # importing just so it can be placed on silent list
             import starlette  # importing just so it can be placed on silent list
             from rich.console import Console
@@ -246,9 +246,9 @@ class Api:
         self.add_api_route("/sdapi/v1/extensions", self.get_extensions_list, methods=["GET"], response_model=list[models.ExtensionItem])
 
         if shared.cmd_opts.api_server_stop:
-            self.add_api_route("/sdapi/v1/server-kill", self.kill_webui, methods=["POST"])
-            self.add_api_route("/sdapi/v1/server-restart", self.restart_webui, methods=["POST"])
-            self.add_api_route("/sdapi/v1/server-stop", self.stop_webui, methods=["POST"])
+            self.add_api_route("/sdapi/v1/server-kill", self.kill_wui, methods=["POST"])
+            self.add_api_route("/sdapi/v1/server-restart", self.restart_wui, methods=["POST"])
+            self.add_api_route("/sdapi/v1/server-stop", self.stop_wui, methods=["POST"])
 
         self.default_script_arg_txt2img = []
         self.default_script_arg_img2img = []
@@ -914,15 +914,15 @@ class Api:
             ssl_certfile=shared.cmd_opts.tls_certfile
         )
 
-    def kill_webui(self):
+    def kill_wui(self):
         restart.stop_program()
 
-    def restart_webui(self):
+    def restart_wui(self):
         if restart.is_restartable():
             restart.restart_program()
         return Response(status_code=501)
 
-    def stop_webui(request):
+    def stop_wui(request):
         shared.state.server_command = "stop"
         return Response("Stopping.")
 

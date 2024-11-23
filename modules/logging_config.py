@@ -27,7 +27,7 @@ except ImportError:
 
 def setup_logging(loglevel):
     if loglevel is None:
-        loglevel = os.environ.get("SD_WEBUI_LOG_LEVEL")
+        loglevel = os.environ.get("SD_WUI_LOG_LEVEL")
 
     if not loglevel:
         return
@@ -41,7 +41,7 @@ def setup_logging(loglevel):
         '%Y-%m-%d %H:%M:%S',
     )
 
-    if os.environ.get("SD_WEBUI_RICH_LOG"):
+    if os.environ.get("SD_WUI_RICH_LOG"):
         from rich.logging import RichHandler
         handler = RichHandler()
     else:

@@ -17,7 +17,7 @@ def connect(token, port, options):
     if account:
         options['basic_auth'] = account
     if not options.get('session_metadata'):
-        options['session_metadata'] = 'stable-diffusion-webui'
+        options['session_metadata'] = 'stable-diffusion-wui'
 
 
     try:

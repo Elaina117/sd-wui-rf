@@ -1,6 +1,6 @@
 /* temporary fix to load default gradio font in frontend instead of backend */
 
-@import url('webui-assets/css/sourcesanspro.css');
+@import url('wui-assets/css/sourcesanspro.css');
 
 
 /* temporary fix to hide gradio crop tool until it's fixed https://github.com/gradio-app/gradio/issues/3810 */
@@ -691,7 +691,7 @@ table.popup-table .link{
     transition: 0.2s ease background-color;
 }
 .modalControls:hover {
-    background-color:rgba(0,0,0, var(--sd-webui-modal-lightbox-toolbar-opacity));
+    background-color:rgba(0,0,0, var(--sd-wui-modal-lightbox-toolbar-opacity));
 }
 .modalClose {
     margin-left: auto;
@@ -773,7 +773,7 @@ table.popup-table .link{
     .modalPrev,
     .modalNext,
     .modalControls .cursor {
-        opacity: var(--sd-webui-modal-lightbox-icon-opacity);
+        opacity: var(--sd-wui-modal-lightbox-icon-opacity);
     }
 }
 

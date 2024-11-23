@@ -366,7 +366,7 @@ onUiLoaded(async() => {
             createTooltip();
         }
 
-        // In the course of research, it was found that the tag img is very harmful when zooming and creates white canvases. This hack allows you to almost never think about this problem, it has no effect on webui.
+        // In the course of research, it was found that the tag img is very harmful when zooming and creates white canvases. This hack allows you to almost never think about this problem, it has no effect on wui.
         function fixCanvas() {
             const activeTab = getActiveTab(elements)?.textContent.trim();
 

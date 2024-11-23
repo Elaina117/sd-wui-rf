@@ -1,5 +1,5 @@
 always_disabled_extensions = [
-    'sd-webui-controlnet',
+    'sd-wui-controlnet',
     'multidiffusion-upscaler-for-automatic1111',
     'forge_jankhidiffusion'
 ]

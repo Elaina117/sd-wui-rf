@@ -33,7 +33,7 @@ class A1111Context:
     txt2img_submit_button: Optional[gr.components.IOComponent] = None
     img2img_submit_button: Optional[gr.components.IOComponent] = None
 
-    # Slider controls from A1111 WebUI.
+    # Slider controls from A1111 WUI.
     txt2img_w_slider: Optional[gr.components.IOComponent] = None
     txt2img_h_slider: Optional[gr.components.IOComponent] = None
     img2img_w_slider: Optional[gr.components.IOComponent] = None

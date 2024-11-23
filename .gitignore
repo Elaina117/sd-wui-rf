@@ -12,16 +12,14 @@ __pycache__
 /models/**/*
 /GFPGANv1.3.pth
 /gfpgan/weights/*.pth
-/ui-config.json
 /outputs
-/config.json
 /log
-/webui.settings.bat
+/wui.settings.bat
 /styles.csv
 /params.txt
 /styles.csv.bak
-/webui-user.bat
-/webui-user.sh
+/wui-user.bat
+/wui-user.sh
 /interrogate
 /user.css
 /.idea
@@ -31,7 +29,6 @@ notification.mp3
 .vscode
 /test/stdout.txt
 /test/stderr.txt
-/cache.json*
 /config_states/
 /node_modules
 /package-lock.json
@@ -42,38 +39,38 @@ trace.json
 /sysinfo-????-??-??-??-??.json
 4.8.0
 ranbooru_cache.sqlite
-webui.bundle
-webui.cert
-webui.key
-webui-user-7860-gpu0-nopass-noalwaysgpu.bat
-webui-user-7860-gpu0-nopass.bat
-webui-user-7860-gpu1-nopass-noalwaysgpu.bat
-webui-user-7860-gpu1-nopass.bat
-webui-user-7860-gpu2-nopass-noalwaysgpu.bat
-webui-user-7860-gpu2-nopass.bat
-webui-user-7980-gpu0-noalwaysgpu.bat
-webui-user-7980-gpu0.bat
-webui-user-7980-gpu1 - sdpa.bat
-webui-user-7980-gpu1-noalwaysgpu-fp8_test.bat
-webui-user-7980-gpu1-noalwaysgpu-tests.bat
-webui-user-7980-gpu1-noalwaysgpu.bat
-webui-user-7980-gpu1.bat
-webui-user-7980-gpu2-noalwaysgpu.bat
-webui-user-7980-gpu2.bat
-webui-user-7981-gpu0 - nopass.bat
-webui-user-7981-gpu0.bat
-webui-user-7981-gpu2-noalwaysgpu-nopass.bat
-webui-user-7981-gpu2.bat
-webui-user-7982-gpu0.bat
-webui-user-7982-gpu1.bat
-webui-user-7982-gpu2 - no pass.bat
-webui-user-7982-gpu2.bat
-webui-user-7991-gpu0 - no pass.bat
-webui-user-7991-gpu0.bat
-webui-user-7991-gpu1.bat
-webui-user-7991-gpu2 - no pass.bat
-webui-user-7991-gpu2.bat
-webui-user-7980-gpu1_main.bat
+wui.bundle
+wui.cert
+wui.key
+wui-user-7860-gpu0-nopass-noalwaysgpu.bat
+wui-user-7860-gpu0-nopass.bat
+wui-user-7860-gpu1-nopass-noalwaysgpu.bat
+wui-user-7860-gpu1-nopass.bat
+wui-user-7860-gpu2-nopass-noalwaysgpu.bat
+wui-user-7860-gpu2-nopass.bat
+wui-user-7980-gpu0-noalwaysgpu.bat
+wui-user-7980-gpu0.bat
+wui-user-7980-gpu1 - sdpa.bat
+wui-user-7980-gpu1-noalwaysgpu-fp8_test.bat
+wui-user-7980-gpu1-noalwaysgpu-tests.bat
+wui-user-7980-gpu1-noalwaysgpu.bat
+wui-user-7980-gpu1.bat
+wui-user-7980-gpu2-noalwaysgpu.bat
+wui-user-7980-gpu2.bat
+wui-user-7981-gpu0 - nopass.bat
+wui-user-7981-gpu0.bat
+wui-user-7981-gpu2-noalwaysgpu-nopass.bat
+wui-user-7981-gpu2.bat
+wui-user-7982-gpu0.bat
+wui-user-7982-gpu1.bat
+wui-user-7982-gpu2 - no pass.bat
+wui-user-7982-gpu2.bat
+wui-user-7991-gpu0 - no pass.bat
+wui-user-7991-gpu0.bat
+wui-user-7991-gpu1.bat
+wui-user-7991-gpu2 - no pass.bat
+wui-user-7991-gpu2.bat
+wui-user-7980-gpu1_main.bat
 main.obj
 main.lib
 main.exp

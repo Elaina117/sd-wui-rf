@@ -1,4 +1,4 @@
-# this scripts installs necessary requirements and launches main program in webui.py
+# this scripts installs necessary requirements and launches main program in wui.py
 import logging
 import re
 import subprocess
@@ -31,7 +31,7 @@ index_url = os.environ.get('INDEX_URL', "")
 dir_repos = "repositories"
 
 # Whether to default to printing command output
-default_command_live = (os.environ.get('WEBUI_LAUNCH_LIVE_OUTPUT') == "1")
+default_command_live = (os.environ.get('WUI_LAUNCH_LIVE_OUTPUT') == "1")
 
 os.environ.setdefault('GRADIO_ANALYTICS_ENABLED', 'False')
 
@@ -403,9 +403,9 @@ def prepare_environment():
     blip_commit_hash = os.environ.get('BLIP_COMMIT_HASH', "48211a1594f1321b00f14c9f7a5b4813144b2fb9")
 
     try:
-        # the existence of this file is a signal to webui.sh/bat that webui needs to be restarted when it stops execution
+        # the existence of this file is a signal to wui.sh/bat that webui needs to be restarted when it stops execution
         os.remove(os.path.join(script_path, "tmp", "restart"))
-        os.environ.setdefault('SD_WEBUI_RESTARTING', '1')
+        os.environ.setdefault('SD_WUI_RESTARTING', '1')
     except OSError:
         pass
 
@@ -453,7 +453,7 @@ def prepare_environment():
 
     os.makedirs(os.path.join(script_path, dir_repos), exist_ok=True)
 
-    git_clone(assets_repo, repo_dir('stable-diffusion-webui-assets'), "assets", assets_commit_hash)
+    git_clone(assets_repo, repo_dir('stable-diffusion-wui-assets'), "assets", assets_commit_hash)
     git_clone(stable_diffusion_repo, repo_dir('stable-diffusion-stability-ai'), "Stable Diffusion", stable_diffusion_commit_hash)
     git_clone(stable_diffusion_xl_repo, repo_dir('generative-models'), "Stable Diffusion XL", stable_diffusion_xl_commit_hash)
     git_clone(k_diffusion_repo, repo_dir('k-diffusion'), "K-diffusion", k_diffusion_commit_hash)
@@ -518,9 +518,9 @@ def configure_forge_reference_checkout(a1111_home: Path):
         ModelRef(arg_name="--hypernetwork-dir", relative_path="models/hypernetworks"),
         ModelRef(arg_name="--embeddings-dir", relative_path="embeddings"),
         ModelRef(arg_name="--lora-dir", relative_path="models/Lora"),
-        # Ref A1111 need to have sd-webui-controlnet installed.
+        # Ref A1111 need to have sd-wui-controlnet installed.
         ModelRef(arg_name="--controlnet-dir", relative_path="models/ControlNet"),
-        ModelRef(arg_name="--controlnet-preprocessor-models-dir", relative_path="extensions/sd-webui-controlnet/annotator/downloads"),
+        ModelRef(arg_name="--controlnet-preprocessor-models-dir", relative_path="extensions/sd-wui-controlnet/annotator/downloads"),
     ]
 
     for ref in refs:
@@ -541,9 +541,9 @@ def start():
     print(f"Launching {'API server' if '--nowebui' in sys.argv else 'Web UI'} with arguments: {shlex.join(sys.argv[1:])}")
     import webui
     if '--nowebui' in sys.argv:
-        webui.api_only()
+        wui.api_only()
     else:
-        webui.webui()
+        wui.webui()
 
     from modules_forge import main_thread
 

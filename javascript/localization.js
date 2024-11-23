@@ -116,7 +116,7 @@ function localizeWholePage() {
     }
 
     for (var comp of window.gradio_config.components) {
-        if (comp.props.webui_tooltip) {
+        if (comp.props.wui_tooltip) {
             let e = elem(comp);
 
             let tl = e ? getTranslation(e.title) : undefined;
