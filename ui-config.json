@@ -1780,7 +1780,7 @@
     "civitai_interface/Save info after download/visible": true,
     "civitai_interface/Save info after download/value": true,
     "civitai_interface/NSFW content/visible": true,
-    "civitai_interface/NSFW content/value": false,
+    "civitai_interface/NSFW content/value": true,
     "civitai_interface/Divide cards by date/visible": true,
     "civitai_interface/Divide cards by date/value": false,
     "civitai_interface/Liked models only/visible": true,
