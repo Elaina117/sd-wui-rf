@@ -36,8 +36,11 @@ class KeyBasedModelMerger(scripts.Script):
             return p
 
         try:
-            model_a_filename = model_a_name if os.path.isfile(model_a_name) else None
-            model_b_filename = model_b_name if os.path.isfile(model_b_name) else None
+            print("Available models:", list(sd_models.checkpoints_list.keys()))
+            print("Selected Model A:", model_a_name)
+            print("Selected Model B:", model_b_name)
+            model_a_filename = sd_models.checkpoints_list[model_a_name].filename
+            model_b_filename = sd_models.checkpoints_list[model_b_name].filename
         except KeyError as e:
             print(f"Error: Selected model is not found in checkpoints list. {e}")
             return p
