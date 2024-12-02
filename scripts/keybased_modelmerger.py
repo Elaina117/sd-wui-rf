@@ -36,7 +36,27 @@ class KeyBasedModelMerger(scripts.Script):
         merge_checkbox = gr.Checkbox(label="モデルのマージを有効にする", value=True)
         use_gpu_checkbox = gr.Checkbox(label="GPUを使用", value=True)
         batch_size_slider = gr.Slider(minimum=1, maximum=500, step=1, value=250, label="KeyMerge_BatchSize")
+        
+        # モデルAドロップダウンが変更されたら
+        model_a_dropdown.change(
+            fn=lambda: setattr(self, 'has_merged', False),
+            inputs=[],
+            outputs=[]
+        )
 
+        # モデルBドロップダウンが変更されたら
+        model_b_dropdown.change(
+            fn=lambda: setattr(self, 'has_merged', False),
+            inputs=[],
+            outputs=[]
+        )
+        # マージの内容が変更されたら
+        keys_and_alphas_textbox.change(
+            fn=lambda: setattr(self, 'has_merged', False),
+            inputs=[],
+            outputs=[]
+        )
+        
         autofill_button.click(
             fn=lambda ratio: f"""model.diffusion_model.input_blocks.0,{ratio}
 model.diffusion_model.input_blocks.1,{ratio}
@@ -63,14 +83,14 @@ model.diffusion_model.output_blocks.2,{ratio}""",
             return process_images(p)
 
         if not model_a_name or not model_b_name:
-            print("Error: Model A or Model B is not selected.")
+            print("エラー： モデルAまたはモデルBが選択されていません。")
             return p
 
         try:
             model_a_filename = sd_models.checkpoints_list[model_a_name].filename
             model_b_filename = sd_models.checkpoints_list[model_b_name].filename
         except KeyError as e:
-            print(f"Error: Selected model is not found in checkpoints list. {e}")
+            print(f"エラー： Selected model is not found in checkpoints list. {e}")
             return p
 
         # マージ処理
