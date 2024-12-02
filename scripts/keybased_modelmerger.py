@@ -7,38 +7,66 @@ from modules.processing import process_images
 
 class KeyBasedModelMerger(scripts.Script):
     def title(self):
-        return "Key-based model merging"
+        # マージ済みフラグを追加
+        self.has_merged = False
+        return "モデルをマージ"
 
     def ui(self, is_txt2img):
-        # UI コンポーネントを定義
         model_names = sorted(sd_models.checkpoints_list.keys(), key=str.casefold)
         
-        model_a_dropdown = gr.Dropdown(
-            label="Model A", choices=model_names, value=model_names[0] if model_names else None
+        model_a_dropdown = gr.Dropdown(label="モデル A", choices=model_names)
+        model_b_dropdown = gr.Dropdown(label="モデル B", choices=model_names)
+        
+        merge_ratio_slider = gr.Slider(
+            minimum=0, 
+            maximum=1, 
+            step=0.01, 
+            value=0.5, 
+            label="マージ比率（0.0で「モデルA」、1.0で「モデルB」になります）"
         )
-        model_b_dropdown = gr.Dropdown(
-            label="Model B", choices=model_names, value=model_names[0] if model_names else None
-        )
+        
         keys_and_alphas_textbox = gr.Textbox(
             label="マージするテンソルのキーとマージ比率 (部分一致, 1行に1つ, カンマ区切り)",
             lines=5,
-            placeholder="例:\nmodel.diffusion_model.input_blocks.0,0.5\nmodel.diffusion_model.middle_block,0.3"
+            placeholder="ここにキーとマージ比率を入力"
         )
+        
+        autofill_button = gr.Button("比率を挿入")
+        
         merge_checkbox = gr.Checkbox(label="モデルのマージを有効にする", value=True)
-        use_gpu_checkbox = gr.Checkbox(label="GPUを使用", value=True)  # GPU/CPU切り替えチェックボックス
-        batch_size_slider = gr.Slider(minimum=1, maximum=500, step=1, value=250, label="KeyMgerge_BatchSize")
+        use_gpu_checkbox = gr.Checkbox(label="GPUを使用", value=True)
+        batch_size_slider = gr.Slider(minimum=1, maximum=500, step=1, value=250, label="KeyMerge_BatchSize")
 
-        return [model_a_dropdown, model_b_dropdown, keys_and_alphas_textbox, merge_checkbox, use_gpu_checkbox, batch_size_slider]
+        autofill_button.click(
+            fn=lambda ratio: f"""model.diffusion_model.input_blocks.0,{ratio}
+model.diffusion_model.input_blocks.1,{ratio}
+model.diffusion_model.input_blocks.2,{ratio}
+model.diffusion_model.middle_block,{ratio}
+model.diffusion_model.output_blocks.0,{ratio}
+model.diffusion_model.output_blocks.1,{ratio}
+model.diffusion_model.output_blocks.2,{ratio}""",
+            inputs=[merge_ratio_slider],
+            outputs=[keys_and_alphas_textbox],
+        )
+
+        return [
+            model_a_dropdown, model_b_dropdown, 
+            keys_and_alphas_textbox, 
+            merge_checkbox, 
+            use_gpu_checkbox, 
+            batch_size_slider
+        ]
 
     def run(self, p, model_a_name, model_b_name, keys_and_alphas_str, merge_enabled, use_gpu, batch_size):
+        # すでにマージ済みの場合は処理をスキップ
+        if self.has_merged:
+            return process_images(p)
+
         if not model_a_name or not model_b_name:
             print("Error: Model A or Model B is not selected.")
             return p
 
         try:
-            print("Available models:", list(sd_models.checkpoints_list.keys()))
-            print("Selected Model A:", model_a_name)
-            print("Selected Model B:", model_b_name)
             model_a_filename = sd_models.checkpoints_list[model_a_name].filename
             model_b_filename = sd_models.checkpoints_list[model_b_name].filename
         except KeyError as e:
@@ -67,7 +95,7 @@ class KeyBasedModelMerger(scripts.Script):
                     if key_part in model_key:
                         final_keys_and_alphas[model_key] = alpha
 
-            # デバイスの設定 (GPUかCPUか選べるようにする)
+            # デバイスの設定
             device = "cuda" if use_gpu and torch.cuda.is_available() else "cpu"
 
             # バッチ処理でキーをまとめて処理
@@ -91,6 +119,9 @@ class KeyBasedModelMerger(scripts.Script):
                         # 直接 state_dict にマージ結果を適用
                         shared.sd_model.state_dict()[key].copy_(torch.lerp(tensor_a, tensor_b, alpha).to(device))
                         print(f"merged {alpha}:{key}")
+
+            # マージ済みフラグを設定
+            self.has_merged = True
 
         # 必要に応じて process_images を実行
         return process_images(p)
