@@ -161,7 +161,7 @@
     "save_images_before_color_correction": false,
     "save_mask": false,
     "save_mask_composite": false,
-    "jpeg_quality": 100,
+    "jpeg_quality": 80,
     "webp_lossless": false,
     "export_for_4chan": true,
     "img_downscale_threshold": 4.0,
